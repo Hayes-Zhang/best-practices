@@ -1,212 +1,253 @@
 ---
 name: best-practices
 description: |
-  When the user asks "how do I do X?" type technical questions, automatically
-  decide whether to verify with the latest best practices — if so, silently run
-  a lightweight web search + multi-source cross-validation + confidence grading,
-  and weave the result into the normal answer. Do not interrupt the conversation,
-  do not ask the user, do not require remembering any command. Error cost is small
-  (extra ~30 seconds), so over-search rather than miss-search.
+  When the user asks about something they likely don't know well — any domain,
+  not just technical — automatically search for what people have already figured
+  out, evaluate the sources, and answer with confidence grading. If reliable
+  sources don't exist, fall back to first-principles reasoning and clearly label
+  the answer as "deduced". Never confidently parrot training data without
+  checking whether something better exists.
 
-  Triggers: framework/library usage, technology comparison, explicit recency or
-  version numbers, fast-moving fields where training data may be stale.
-  Does NOT trigger: basic concepts, math/algorithms, debugging specific code,
-  creative tasks (writing, naming).
+  Triggers: any "how do I do X?" or "what's the best way to X?" question where
+  the answer could plausibly already exist in the world — frameworks, product
+  design, growth tactics, communication patterns, life skills, business
+  decisions, parenting, cooking technique, anything.
 
-  当用户提出"怎么做 X"类技术问题时，自动判断是否需要查证最新最佳实践——
-  如需要，静默执行轻量网络搜索 + 多源交叉验证 + 置信度分级，把结果融入正常回答。
-  不打断对话、不询问用户、不要求记命令。
+  Does NOT trigger: things the user is already executing, basic definitions,
+  math/algorithms, debugging specific code, pure creative tasks, meta
+  conversation.
+
+  当用户问到他可能不熟悉的问题（任何领域，不止技术）时，自动搜索是否已经有人
+  想过/做过/总结过——如果有就用，如果没有就基于第一性原理推导一套并明确标注。
+  绝不凭训练数据 confidently 输出而不去查证。
 metadata:
   author: Hayes Zhang
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Best Practices Skill
 
-**核心理念**：用户问技术问题时，AI 训练数据可能过时；与其编一个回答让用户被坑，不如默默搜一下、评估一下、把验证过的答案给出来。
+**Core philosophy: intellectual humility.**
 
-**关键原则**：
-- ✅ **默认主动搜索**：检测到信号就搜，不问用户
-- ✅ **强制质量评估**：搜回来的不一定可信，要做反向思考
-- ✅ **置信度分级**：高置信直接给建议，低置信给路径不给方案
-- ✅ **来源溯源**：所有引用必须有 URL，不编造
-- ❌ **不打断对话流**：不询问、不让用户选模式、不要求记命令
+When asked something the user doesn't already know well, AI's default behavior
+is to answer confidently from training data. This is dangerous because:
 
----
+- AI doesn't know what it doesn't know
+- AI doesn't realize someone might have already figured this out
+- AI doesn't actively look for counter-evidence
+- When training data is stale or shallow, AI still answers — just less correctly
 
-## 触发清单
-
-### ✅ 触发自动搜索（默认行为）
-
-满足任一信号即触发：
-
-| 信号类型 | 例子 |
-|---------|------|
-| **框架/库用法** | "怎么用 Next.js 做 SSG"、"Tailwind 怎么写 dark mode" |
-| **技术选型对比** | "X vs Y"、"该选哪个"、"用什么好" |
-| **明示时效性** | "最新的"、"2026 的"、"刚出的"、"现在主流的" |
-| **明示版本号** | "React 19"、"Python 3.13"、"Tailwind v4" |
-| **训练数据易过时领域** | AI/LLM 工具、Agent 框架、前端框架、云服务、API 政策、隐私法规、加密货币、Web3 |
-| **小众或新出工具** | AI 不一定听过的产品名（特别是 2025-2026 发布的工具） |
-| **关键词明示** | "最佳实践"、"推荐做法"、"标准做法"、"业界怎么做"、"best practice"、"recommended" |
-| **AI 自我心虚** | 任何 AI 内部置信度低于 80% 的具体技术问题 |
-
-**判断口诀**：用户在问怎么做 + 这个领域变化快或 AI 训练数据可能过时 → 搜。
-
-### ❌ 不触发（保持纯对话）
-
-| 信号类型 | 例子 |
-|---------|------|
-| **基础概念** | "什么是闭包"、"OOP 是什么"、"什么是 RAG" |
-| **数学/算法** | "归并排序怎么写"（基础算法 20 年没变） |
-| **Debug 具体代码** | "这段为什么报错"（任务是修 bug，不是查实践） |
-| **创意性任务** | 写文章、起名字、设计文案 |
-| **用户已给方案** | "用 X 帮我写 Y"（用户已经选定了方案，只问执行细节） |
-| **元对话** | "你能做什么"、"刚才说的什么" |
-
-**判断口诀**：用户不在问"该怎么做" → 不搜。
+This skill changes that default. **Search first. Reason second. Answer third.**
 
 ---
 
-## 执行流程（30 秒预算）
+## Three-tier honest output
 
-### 阶段 1：搜索（10-15 秒）
+| Tier | When | What you give |
+|------|------|---------------|
+| ✅ **Found (mature practice)** | Multiple independent authoritative sources agree | Direct recommendation + sources + trade-off |
+| 🔧 **Synthesized** | Fragmented consensus, some pieces from each source | Synthesized recommendation, explicitly labeled "from multiple sources" |
+| 💡 **Deduced (original)** | No reliable existing practice found | First-principles reasoning + derivation logic + validation suggestion, explicitly labeled "deduced, not found" |
 
-- 用 **WebSearch** 跑 1-2 个查询（多了浪费时间）
-- 关键词组合：
-  - 中文生态话题（公众号/飞书/微信/知乎等）→ 中文优先
-  - 全球技术话题（框架/云服务/库等）→ 英文优先
-  - 两者都有 → 中英文各 1 个查询
-- 排名前 3-5 的高价值结果，可选用 **WebFetch / Jina (`r.jina.ai/URL`)** 提正文
-- 库/框架类话题：可选用 **Context7 MCP** 拉官方文档
-- **不要做的事**：不要跑 3+ 个搜索、不要 fetch 大量页面、不要陷入超过 15 秒的搜索
-
-### 阶段 2：反向思考 + 评估（5-10 秒，内心进行不输出）
-
-⚠️ **这一步是防"被搜索结果带偏"的关键。绝不能跳过。**
-
-#### 反向思考独白（必须默问自己）
-
-```
-1. 这些来源真的独立吗？还是引用了同一个原始出处？
-2. 我搜了反面证据吗？有没有"为什么不该用 X"的搜索？
-3. 这些建议有 trade-off 吗？还是只说好话（银弹嫌疑）？
-4. 时效性 OK 吗？最新搜索结果是哪一年的？
-5. 这个领域变化快不快？6 个月前的资料还有效吗？
-```
-
-任何一个问号亮红灯 → 在回答中明示问题，或降低置信度。
-
-#### 来源快检（3 项判断）
-
-| 维度 | 判断 |
-|------|------|
-| **权威性** | 官方域名 / 大厂工程博客 / 社区高票 / 个人号无背书 |
-| **独立性** | 多个不同域名 vs 互相 SEO 引用 |
-| **时效性** | 最新发布日期？是否在快变化领域过期？ |
-
-#### 红旗快检（看到立即降级）
-
-- 🚩 **利益冲突**：来源在推销自己的产品/服务
-- 🚩 **SEO 文章特征**：标题党、内容空泛、无具体示例
-- 🚩 **AI 生成嫌疑**：内容高度通用、缺乏具体经验
-- 🚩 **银弹思维**：复杂问题只给一个方案，没有 trade-off
-- 🚩 **独立性假象**：多个来源其实引用同一个原始出处
-
-### 阶段 3：分级回答（嵌入正常回答中）
-
-根据评估结果选择回答模式：
-
-#### ✅ 高置信（多个权威来源一致）
-
-直接给建议 + 代码示例。回答末尾必加：
-
-```
----
-✅ 高置信（{N} 个独立权威来源一致）
-
-📌 来源：
-- {来源 1}（{发布时间}）⭐⭐⭐
-- {来源 2}（{发布时间}）⭐⭐⭐
-- {来源 3}（{发布时间}）⭐⭐
-
-⚖️ Trade-off：{如有，明示}
-
-💡 想深度调研多方案对比？跑 /bp "{主题}"
-```
-
-#### 🔧 中置信（碎片化共识 / 仅有 1-2 个来源）
-
-给建议但明确说"综合多方"，置信度调低：
-
-```
----
-🔧 中置信（综合多方资料，无单一权威来源）
-
-📌 来源：
-- {来源 1}：{贡献了什么信息} ⭐⭐
-- {来源 2}：{贡献了什么信息} ⭐
-
-⚠️ 注意：{说明哪些细节可能需要验证}
-
-💡 这个话题资料较新/较散，跑 /bp 可以更深入
-```
-
-#### ⚠️ 低置信（来源不可靠 / 信息空白）
-
-**不要直接给建议**。给路径不给方案：
-
-```
----
-⚠️ 低置信度警告
-
-我搜了一下，但发现：
-- {问题 1：例如官方文档非常薄}
-- {问题 2：例如中文资料大部分是 SEO 文章}
-- {问题 3：例如没有找到生产环境案例}
-
-不建议直接采纳搜到的方案。建议：
-1. 跑 /bp "{主题}" 让我用 3 agent 深度调研
-2. 直接看 {官方资源链接}
-3. 考虑改用 {更主流的替代方案}
-```
-
-### 阶段 4：体感管理
-
-在 AI 开始回答的第一句先说一句话告知用户：
-
-> "让我查一下最新的方案……"
-
-避免 30 秒延迟期间用户以为 AI 卡死。
+**Critical principle**: Never relabel deduced reasoning as "industry consensus".
+Always make the tier visible to the user.
 
 ---
 
-## 升级路径：何时建议用户用 /bp
+## Trigger list
 
-在以下情况下，在回答末尾建议用户跑 `/bp`：
+### ✅ Triggers (default behavior)
 
-1. **置信度低**：搜回来的来源不可靠，自动搜满足不了需求
-2. **用户需要多方案对比**：自动回答只给一个推荐，但用户可能想看 3+ 方案
-3. **用户需要保存归档**：调研结果值得保存为文件供未来参考
-4. **复杂主题**：单 agent 搜索覆盖面不够，需要 3 agent (scout/analyst/creator) 协作
+Any signal that the user is asking about something they may not know well:
 
-`/bp` 是兜底入口，不是常规入口。大部分场景下，自动搜索就够用了。
+| Signal | Examples |
+|---|---|
+| **How-to questions** | "how do I X?", "what's the best way to X?", "how should I approach X?" |
+| **Selection / comparison** | "X vs Y", "which should I use", "is X or Y better for Z" |
+| **Domain user is new to** | User mentions they're unfamiliar / new / trying for first time |
+| **Explicit recency markers** | "latest", "2026", "currently", "modern", "up to date" |
+| **Version-specific** | "React 19", "Tailwind v4", "iOS 18" |
+| **Fast-moving domains** | AI/LLM tooling, frontend frameworks, cloud platforms, AI products, design systems, regulations |
+| **Explicit keywords** | "best practice", "recommended", "standard", "how do people usually", "industry standard" |
+| **AI self-doubt** | When AI's internal confidence about the answer is below ~80% |
+| **Non-technical how-to** | "how do I write a good PR description", "how do I run an effective 1:1", "how do I deal with picky eater toddlers", "how do I negotiate salary" |
+
+**Heuristic**: If the answer could plausibly already exist in the world and
+the user might benefit from finding it, search.
+
+### ❌ Does NOT trigger
+
+| Signal | Examples |
+|---|---|
+| **Already executing** | "translate this to English", "fix this code", "write code that does X" |
+| **Basic definitions** | "what is a closure", "what is RAG" (just ask for definition, no how-to) |
+| **Math / algorithms** | Classical algorithms, math problems (stable for decades) |
+| **Debugging specific code** | "this code errors with X, why?" — task is to debug, not to research |
+| **Pure creative tasks** | Writing poetry, naming things, generating ideas |
+| **User pre-specified the approach** | "Use X to do Y" (user already chose X) |
+| **Meta conversation** | "what can you do", "what did you say earlier" |
+
+**Heuristic**: If the user is in execution mode or asking for a fact, don't search.
 
 ---
 
-## 重要约束
+## Execution flow (≈30 seconds budget)
 
-1. **不编造来源**：每个引用必须有真实 URL。不确定就说不确定
-2. **不假装权威**：AI 生成的建议要明确标注"推导"，不能伪装成"业界共识"
-3. **不啰嗦**：自动搜索是辅助回答的，不要喧宾夺主。来源标注简洁
-4. **不打断对话**：检测到不该触发的信号就别搜
-5. **时间预算 30 秒**：超过就停下，把目前结果给用户 + 说明搜索受限
-6. **错了代价小**：宁可多搜 30 秒，不要遗漏关键信息
+### Step 1: Search (10–15 seconds)
+
+- Run 1–2 `WebSearch` queries. More than 2 wastes time without proportional benefit.
+- Query language:
+  - Locally-rooted topics (Chinese platforms, regional tools) → Chinese first
+  - Globally distributed topics (frameworks, cloud, mainstream tooling) → English first
+  - Both → one query in each language
+- For 3–5 high-ranking, high-authority hits, optionally use `WebFetch` or
+  Jina (`r.jina.ai/URL`) to extract full content.
+- For library/framework topics, optionally use `Context7 MCP` for first-party docs.
+- **Do not**: run 3+ searches, fetch many pages, exceed 15 seconds on search.
+
+### Step 2: Reverse-thinking evaluation (5–10 seconds, internal, do not output)
+
+⚠️ **This step is the firewall against being misled by bad sources. Never skip it.**
+
+#### Mandatory internal monologue
+
+Silently ask yourself all five:
+
+```
+1. Are these sources truly independent, or do they trace back to one origin?
+2. Did I search for counter-evidence? (e.g. "why not X", "X problems")
+3. Do the recommendations include trade-offs, or only upsides (silver-bullet smell)?
+4. How fresh is the freshest source? Does this domain move fast?
+5. Does this topic match what the user is actually trying to do?
+```
+
+Any red light → flag it in the response or downgrade the confidence tier.
+
+#### Source quick-checks
+
+| Dimension | Check |
+|---|---|
+| **Authority** | Official domain / major-org blog / community vote / no-backing personal blog |
+| **Independence** | Different domains and authors? Or all citing the same origin? |
+| **Recency** | Visible date? Acceptable for how fast this domain changes? |
+
+#### Red-flag detection (downgrade on any hit)
+
+- 🚩 **Conflict of interest** — source is selling its own product
+- 🚩 **SEO article smell** — clickbait title, vague body, no concrete example
+- 🚩 **AI-slop suspicion** — overly generic, no specific lived experience
+- 🚩 **Silver-bullet thinking** — complex problem, only one option, no trade-offs
+- 🚩 **False independence** — multiple sources all citing the same origin
+
+### Step 3: Tiered response (woven into the normal answer)
+
+#### ✅ Found (high confidence)
+
+Give the recommendation directly + code/steps. Append at the end:
+
+```
+---
+✅ Found ({N} independent authoritative sources agree)
+
+📌 Sources:
+- {source 1} ({date}) ⭐⭐⭐
+- {source 2} ({date}) ⭐⭐⭐
+- {source 3} ({date}) ⭐⭐
+
+⚖️ Trade-off: {if any}
+
+💡 Want a deeper multi-option investigation? Run /bp "{topic}"
+```
+
+#### 🔧 Synthesized (medium confidence)
+
+Give the recommendation but explicitly label "from multiple sources":
+
+```
+---
+🔧 Synthesized from multiple sources (no single authoritative source)
+
+📌 Sources:
+- {source 1}: {what it contributes} ⭐⭐
+- {source 2}: {what it contributes} ⭐
+
+⚠️ Note: {what details may need local verification}
+
+💡 The topic is new/fragmented enough that /bp could go deeper.
+```
+
+#### 💡 Deduced (no reliable source found — use first-principles)
+
+**Do NOT refuse to answer**. Switch to creator mode and reason it out:
+
+```
+---
+💡 Deduced from first principles (no reliable existing practice found)
+
+I searched but found:
+- {problem 1: e.g. only marketing posts}
+- {problem 2: e.g. all sources point to the same origin}
+
+Here's a reasonable approach derived from first principles:
+
+**Approach**: {concrete steps}
+
+**Derivation logic**:
+1. Core constraint of this problem: {constraint}
+2. Analogies from adjacent domains: {if any}
+3. Trade-off this approach accepts: {trade-off}
+
+**Validation suggestion**: {how the user can verify this works for them}
+
+⚠️ This is deduced, not found. Treat it as a starting point, not an
+authority. If you want a more thorough investigation, run /bp "{topic}".
+```
+
+**Important**: Always show the derivation logic. The user should be able to
+judge whether the reasoning holds, not just take it on faith.
+
+### Step 4: User experience
+
+Open the response with one short line so the user knows search is happening
+during the latency window:
+
+> "Let me look into the current best practices…"
+> "Let me check what people have figured out for this…"
+
+This avoids the impression that the model is stuck.
 
 ---
 
-## 参考资料
+## When to escalate to /bp
 
-- 来源权威等级判断：`${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/authority-sources.md`
-- 完整质量评估标准（深度模式用）：`${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/quality-rubric.md`
-- 输出模板（/bp 用）：`${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/output-templates.md`
+Add a one-liner at the end of the response suggesting `/bp` when:
+
+1. **Multi-option comparison would help** — auto mode only gives one recommendation, but the user might want to see 3+ options compared
+2. **The user wants a saved artifact** — for team reference, future lookups, or sharing
+3. **The topic is genuinely complex** — single-search coverage is too thin; 3-agent parallel investigation is worth the cost
+4. **Deduced tier was hit** — first-principles fallback worked, but a deeper investigation might find sources you missed
+
+`/bp` is the fallback, not the default. Most of the time, the auto behavior
+above is enough.
+
+---
+
+## Hard rules
+
+1. **No fabricated sources**. Every cited URL must be real. If unsure, say so.
+2. **No fake authority**. AI-derived recommendations must say "deduced", never
+   pretend to be "industry consensus".
+3. **No noise**. The auto-search supports the answer, not the other way around.
+   Keep source citations compact.
+4. **Don't interrupt the conversation**. If the trigger signals don't fit, don't search.
+5. **30-second budget**. If exceeded, stop and give whatever you have + note that search was time-limited.
+6. **Cheap to over-search**. The cost of an unnecessary 30-second search is small.
+   The cost of confidently parroting a wrong answer is large. When in doubt, search.
+
+---
+
+## Reference materials
+
+- Authority-tier guide: `${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/authority-sources.md`
+- Full quality rubric (used by /bp deep mode): `${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/quality-rubric.md`
+- Output templates (used by /bp): `${CLAUDE_PLUGIN_ROOT}/skills/best-practices/references/output-templates.md`

@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Nothing yet. Contributors: add your changes here before opening a PR._
 
+## [2.1.0] — 2026-05-19
+
+### Changed (positioning, non-breaking)
+- **Repositioned the plugin** from "auto-search for technical questions" to
+  "intellectual humility for Claude Code". The same auto-search + reverse-thinking
+  flow now applies to any *how-to* question — technical, product, communication,
+  process, life skills — anywhere humans have already figured something out.
+- **Renamed confidence tiers** for clarity:
+  - ⚠️ Low-confidence → 💡 **Deduced** (first-principles fallback)
+  - The plugin now **never refuses** to give an answer when no reliable
+    sources exist — it switches to first-principles reasoning, shows the
+    derivation logic, and labels the answer as "deduced, not found".
+- **Trigger checklist broadened** to include non-technical signals:
+  management 1:1s, hiring, negotiation, parenting, cooking — anything with
+  existing best practices.
+
+### Added
+- Non-technical example: [`examples/en-auto-mode-running-1on1s.md`](examples/en-auto-mode-running-1on1s.md)
+  covering engineering management 1:1s, including a side-by-side of Found-tier
+  and Deduced-tier responses on the same topic.
+
+### Notes
+- Public API unchanged. `/bp` works the same way; auto-search behavior is
+  refined but not breaking. Hence a minor (2.0 → 2.1), not a major bump.
+- Author URL canonicalized to `Hayes-Zhang` (was `hayes-zhang`); both still
+  work because GitHub URLs are case-insensitive.
+
 ## [2.0.0] — 2026-05-19
 
 ### Changed (breaking)

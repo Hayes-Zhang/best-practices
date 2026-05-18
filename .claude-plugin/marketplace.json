@@ -1,22 +1,22 @@
 {
   "name": "best-practices",
-  "description": "Auto-search best practices with reverse-thinking quality evaluation and confidence grading.",
+  "description": "Intellectual humility for Claude Code — searches existing best practices on any topic, grades source quality, and falls back to first-principles reasoning when nothing reliable exists.",
   "owner": {
     "name": "Hayes Zhang",
-    "url": "https://github.com/hayes-zhang"
+    "url": "https://github.com/Hayes-Zhang"
   },
   "plugins": [
     {
       "name": "best-practices",
-      "description": "Silently searches the web for current best practices when you ask technical questions. Evaluates source quality with reverse-thinking, grades its own confidence, and refuses to parrot unreliable sources. Use /bp for deep 3-agent investigations.",
-      "version": "2.0.0",
+      "description": "When you ask about something you don't know well — technical or otherwise — silently searches for existing best practices, evaluates source quality with reverse-thinking, grades its own confidence (Found / Synthesized / Deduced), and reasons from first principles when no reliable practice exists. Use /bp for deep 3-agent investigations.",
+      "version": "2.1.0",
       "author": {
         "name": "Hayes Zhang",
-        "url": "https://github.com/hayes-zhang"
+        "url": "https://github.com/Hayes-Zhang"
       },
       "source": "./",
       "category": "productivity",
-      "keywords": ["best-practices", "research", "web-search", "quality-evaluation"]
+      "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "first-principles"]
     }
   ]
 }

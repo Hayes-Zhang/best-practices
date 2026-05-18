@@ -68,21 +68,45 @@ to a technical question in conversation, without the user running any command.
 5. **Upgrade hint**: The user can escalate to a full multi-method comparison
    via `/bp` if they need more depth — but they don't have to.
 
-## What a *low-confidence* response would look like
+## What a *Deduced* response would look like
 
 If the skill found only SEO-optimized articles and no authoritative source, it
-would refuse to give a direct recommendation. Instead:
+**doesn't refuse** — it switches to first-principles reasoning and labels the
+answer clearly. For example, if you asked about a less-mainstream auth scenario
+where official docs are thin:
 
-> ⚠️ **Low confidence**
+> 💡 **Deduced from first principles** (no reliable existing practice found)
 >
-> I searched but found mostly SEO articles repeating the same surface-level
-> advice, no official documentation for this specific use case, and conflicting
-> recommendations across community posts.
+> I searched but found mostly SEO articles repeating surface-level advice, no
+> official documentation for this specific use case, and conflicting community
+> posts.
 >
-> I won't give you a recommendation I can't back up. Suggested next steps:
-> 1. Run `/bp "{your topic}"` to launch a 3-agent deep investigation
-> 2. Check the project's GitHub `examples/` folder directly
-> 3. Consider switching to a more mainstream alternative if available
+> Here's a reasonable approach derived from first principles:
+>
+> **Approach**: Use Auth.js v5 as the foundation (it's the most flexible
+> primitive in the Next.js ecosystem) and implement the custom flow as a
+> credentials provider that wraps your specific identity logic. Treat the
+> session as opaque from the rest of your app — your custom logic lives
+> only inside the provider's `authorize()` callback.
+>
+> **Derivation logic**:
+> 1. Auth in Next.js has two layers: identity verification (who you are)
+>    and session management (proof you're still you). They should be
+>    separable.
+> 2. Auth.js already solves session management cleanly. The unsolved part
+>    is your custom identity verification.
+> 3. Therefore: keep Auth.js for sessions, customize only the identity
+>    layer via a credentials provider.
+>
+> **Validation suggestion**: Write a 50-line happy-path proof of concept
+> before committing to the architecture. If the credentials provider feels
+> awkward for your use case, that's signal to look harder for an existing
+> pattern rather than push through.
+>
+> ⚠️ This is deduced, not found. Treat it as a starting point. For deeper
+> investigation including alternatives like Lucia, Iron Session, or fully
+> custom JWT handling, run `/bp "Next.js custom authentication patterns"`.
 
-This is the **most important behavior** of the plugin: it refuses to confidently
-parrot bad sources. Garbage in, refusal out.
+This is the **most distinctive behavior** of the plugin: when nobody has
+cleanly figured something out, it still gives you a workable answer —
+but it never pretends a first-principles guess is consensus.

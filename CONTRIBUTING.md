@@ -19,7 +19,7 @@ contributions that **improve its judgment** are especially welcome.
 ## What's less useful
 
 - Adding new slash commands. The current 1-command surface is intentional
-  (see [CHANGELOG `2.0.0`](CHANGELOG.md) for rationale).
+  (see [CHANGELOG `2.0.0`/`2.1.0`](CHANGELOG.md) for rationale).
 - Adding configuration knobs for behavior the skill should decide automatically.
 - Generic AI-tool boilerplate (CI for a plugin with no compiled code, etc.).
 

@@ -1,5 +1,5 @@
 ---
-description: Deep best-practices research with a 3-agent team (scout/analyst/creator), cross-validation, and a saved Markdown report. Escape hatch when the auto-search skill's confidence isn't enough, or when you need a persistent artifact. Usage: /bp "<topic>"
+description: Deep best-practices research on any topic (technical or otherwise) with a 3-agent team (scout/analyst/creator), cross-validation, and a saved Markdown report. Escape hatch when the auto-search skill's confidence isn't enough, or when you need a persistent artifact. Usage: /bp "<topic>"
 ---
 
 # /bp — Deep Best-Practices Research
@@ -14,6 +14,11 @@ description: Deep best-practices research with a 3-agent team (scout/analyst/cre
 > - You need a multi-option comparison with full trade-offs
 > - You want a saved Markdown report for your team or future reference
 > - The topic is complex enough that a single search angle misses too much
+>
+> **Topics can be anything** — technical (e.g. "Next.js authentication libraries"),
+> product (e.g. "onboarding flow design"), process (e.g. "engineering oncall
+> rotations"), or life skills (e.g. "negotiating salary at a startup"). The
+> 3-agent investigation works the same way regardless of domain.
 >
 > Cost: ~5–10 min and ~3–5× the tokens of a normal turn (3 Opus agents in parallel).
 > Output: Markdown report saved under `./best-practices/<topic-slug>-guide.md`.
@@ -73,7 +78,12 @@ description: Deep best-practices research with a 3-agent team (scout/analyst/cre
 确定：
 1. **核心问题**：用户到底想知道什么
 2. **搜索语言**：中文优先 / 英文优先 / 两者都搜
-3. **领域分类**：技术工程 / AI&LLM / 产品设计 / 运营方法 / 工具使用
+3. **领域分类**（无限制——只要这件事已经有人想过/做过）：
+   - 技术工程、AI/LLM、产品设计、运营增长、工具使用
+   - 沟通管理（1:1、汇报、谈薪、招聘、远程协作等）
+   - 生活技能（育儿、烹饪、健身、理财等）
+   - 商业策略（融资、市场进入、定价等）
+   - 其他任何有公认实践的领域
 
 ---
 
