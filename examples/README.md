@@ -12,7 +12,7 @@ Real outputs from the `best-practices` plugin, showing what to expect.
 
 | File | Topic | Language | What it shows |
 |---|---|---|---|
-| [zh-bp-llm-agent-frameworks.md](zh-bp-llm-agent-frameworks.md) | LLM Agent 框架对比 | 中文 | Illustrative `/bp` deep-mode report: 3-tier honest grading (mature/synthesized/deduced), source attribution, decision tree, and explicit knowledge gaps |
+| [zh-bp-postgres-indexing.md](zh-bp-postgres-indexing.md) | PostgreSQL 索引设计 | 中文 | Illustrative `/bp` deep-mode report: 3-tier honest grading (mature/synthesized/deduced), source attribution, actionable checklist, and explicit knowledge gaps |
 
 ---
 
