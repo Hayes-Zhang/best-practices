@@ -1,0 +1,10 @@
+{
+  "name": "best-practices",
+  "version": "2.0.0",
+  "description": "Auto-search best practices with reverse-thinking quality evaluation and confidence grading. Refuses to confidently parrot bad sources.",
+  "author": { "name": "Hayes Zhang", "url": "https://github.com/hayes-zhang" },
+  "homepage": "https://github.com/hayes-zhang/best-practices",
+  "repository": "https://github.com/hayes-zhang/best-practices",
+  "license": "MIT",
+  "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "agent-team"]
+}

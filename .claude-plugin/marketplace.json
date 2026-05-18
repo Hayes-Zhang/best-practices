@@ -1,0 +1,22 @@
+{
+  "name": "best-practices",
+  "description": "Auto-search best practices with reverse-thinking quality evaluation and confidence grading.",
+  "owner": {
+    "name": "Hayes Zhang",
+    "url": "https://github.com/hayes-zhang"
+  },
+  "plugins": [
+    {
+      "name": "best-practices",
+      "description": "Silently searches the web for current best practices when you ask technical questions. Evaluates source quality with reverse-thinking, grades its own confidence, and refuses to parrot unreliable sources. Use /bp for deep 3-agent investigations.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Hayes Zhang",
+        "url": "https://github.com/hayes-zhang"
+      },
+      "source": "./",
+      "category": "productivity",
+      "keywords": ["best-practices", "research", "web-search", "quality-evaluation"]
+    }
+  ]
+}
