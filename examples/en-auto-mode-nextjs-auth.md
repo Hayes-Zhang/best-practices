@@ -40,7 +40,7 @@ to a technical question in conversation, without the user running any command.
 >
 > ---
 >
-> ✅ **High confidence** (3 independent authoritative sources agree)
+> ✅ **Found** (3 independent authoritative sources agree)
 >
 > 📌 Sources:
 > - [Auth.js v5 docs](https://authjs.dev/getting-started) (updated 2026-02) ⭐⭐⭐
@@ -70,16 +70,22 @@ to a technical question in conversation, without the user running any command.
 
 ## What a *Deduced* response would look like
 
-If the skill found only SEO-optimized articles and no authoritative source, it
-**doesn't refuse** — it switches to first-principles reasoning and labels the
+If the skill found only SEO-optimized articles and no authoritative source —
+**and** no adjacent-scenario mature practice that could be adapted — it
+**doesn't refuse**. It switches to first-principles reasoning and labels the
 answer clearly. For example, if you asked about a less-mainstream auth scenario
-where official docs are thin:
+where official docs are thin and even adjacent auth scenarios (passwordless,
+hardware-key, federated identity) don't transfer cleanly:
 
-> 💡 **Deduced from first principles** (no reliable existing practice found)
+> 💡 **Deduced from first principles** (no direct best practice found, and
+> no usable adjacent analog after searching for passwordless / hardware-key /
+> federated identity patterns — none of those transferred cleanly to this
+> specific case)
 >
 > I searched but found mostly SEO articles repeating surface-level advice, no
 > official documentation for this specific use case, and conflicting community
-> posts.
+> posts. I also looked for adjacent auth scenarios with similar constraints,
+> but the patterns there made assumptions that don't hold here.
 >
 > Here's a reasonable approach derived from first principles:
 >

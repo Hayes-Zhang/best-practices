@@ -6,15 +6,26 @@ contributions that **improve its judgment** are especially welcome.
 ## What's most useful
 
 1. **Authority sources** — Add new high-quality sources for specific domains
-   (frameworks, AI tooling, design systems, etc.) by editing
+   (frameworks, AI tooling, design systems, growth, process playbooks, life
+   skills, etc.) by editing
    [`skills/best-practices/references/authority-sources.md`](skills/best-practices/references/authority-sources.md).
-2. **Red flags** — Spot a recurring pattern in low-quality sources we don't
+2. **Adjacent-scenario mappings (for 🧩 Adapted tier)** — The Adapted tier
+   transfers mature practices from one scenario to another with similar
+   constraints (e.g. *"API design ← database table design"*, *"new-hire 1:1 ←
+   customer discovery interview"*). PRs that document a useful adjacency are
+   high-value — add them to the "邻近场景识别策略" section in
+   [`authority-sources.md`](skills/best-practices/references/authority-sources.md).
+3. **Red flags** — Spot a recurring pattern in low-quality sources we don't
    yet detect? Add it to the red-flag list in
-   [`SKILL.md`](skills/best-practices/SKILL.md).
-3. **Trigger refinements** — Find cases where the skill triggers too often,
+   [`SKILL.md`](skills/best-practices/SKILL.md) or
+   [`quality-rubric.md`](skills/best-practices/references/quality-rubric.md)
+   (the latter has a *伪邻近迁移* red flag specific to the Adapted tier).
+4. **Trigger refinements** — Find cases where the skill triggers too often,
    or fails to trigger when it should? Open an issue with the exact prompt.
-4. **Example outputs** — Real `/bp` outputs that demonstrate the plugin's
-   value are gold. PR them to [`examples/`](examples/).
+5. **Example outputs** — Real auto-mode or `/bp` outputs that demonstrate the
+   plugin's value are gold. PR them to [`examples/`](examples/).
+   **🧩 Adapted-tier examples are especially welcome** — they're the most
+   distinctive output and the hardest to write well.
 
 ## What's less useful
 
@@ -44,7 +55,10 @@ Then test in a fresh Claude Code conversation:
 
 | Test prompt | Expected behavior |
 |---|---|
-| "How do I do auth in Next.js 15?" | Auto-trigger, returns answer with sources + confidence |
+| "How do I do auth in Next.js 15?" | Auto-trigger, returns answer with sources + ✅ Found tier (Auth.js / Clerk) |
+| "How do I add multi-LLM access?" | Auto-trigger, ✅ Found tier (OpenRouter SaaS) |
+| "How do I design local-first sync for an AI notes app?" | Auto-trigger, 🧩 Adapted tier (borrows from Notion / Linear / Obsidian) |
+| "How do I run 1:1s with a report twice my age and used to be my peer?" | Auto-trigger, 💡 Deduced (only after searching adjacent reverse-mentorship literature) |
 | "What is a closure?" | No trigger, normal conversational answer |
 | `/bp "LLM agent orchestration"` | 3-agent team starts, file saved on completion |
 

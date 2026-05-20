@@ -1,7 +1,13 @@
 # 示例：`/bp` 深度调研 — PostgreSQL 索引设计最佳实践
 
-> **⚠️ 说明**：这是一个**示例性输出**（illustrative example），用来展示 `/bp` 命令
-> 在 3-agent 并行模式下的**报告格式与质量基线**，不是真实运行结果。
+> **⚠️ 说明 1（版本）**：本示例创建于 v2.1 时代，采用三级置信度
+> (Found / Synthesized / Deduced) 章节结构。**v2.2 起新增了 🧩 Adapted 这一级**
+> （邻近场景借鉴 + 三段式定制），完整 4 级示范见
+> [`en-auto-mode-adapted-example.md`](en-auto-mode-adapted-example.md)。本示例的
+> 报告骨架仍然有效，只是缺少独立的"定制建议（Adapted）"章节。
+>
+> **⚠️ 说明 2（数据）**：这是一个**示例性输出**（illustrative example），用来展示
+> `/bp` 命令在 3-agent 并行模式下的**报告格式与质量基线**，不是真实运行结果。
 >
 > 文中提及的来源域名（PostgreSQL 官方文档、Percona 工程博客等）是真实存在的官方
 > 来源，但具体页面 URL、置信度评分、来源数量等数字均为示意，运行真实 `/bp` 时

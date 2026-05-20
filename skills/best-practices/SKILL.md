@@ -310,7 +310,7 @@ Add a one-liner at the end of the response suggesting `/bp` when:
 2. **The user wants a saved artifact** — for team reference, future lookups, or sharing
 3. **The topic is genuinely complex** — single-search coverage is too thin; 3-agent parallel investigation is worth the cost
 4. **Adapted tier was hit** — a single auto-mode search might have missed direct practices, OR the adjacent analogs picked were not the best fit. 3-agent investigation can broaden the search for direct practice AND surface stronger adjacent scenarios.
-5. **Deduced tier was hit** — first-principles fallback worked, but a deeper investigation might find direct sources or adjacent analogs you missed
+5. **Deduced tier was hit** — first-principles derivation was the right call given what was searched, but a deeper investigation might surface direct sources or adjacent analogs the single-search pass missed
 
 `/bp` is the fallback, not the default. Most of the time, the auto behavior
 above is enough.
