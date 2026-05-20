@@ -25,20 +25,26 @@ Works for **any** "how do I do X?" question — technical, product, life skills.
 The most common AI failure mode for `how-do-I-X` questions isn't hallucination —
 it's **reinventing the wheel**.
 
-You ask AI to set up multi-LLM access. By default it writes one-by-one API
-integrations, when the mature ecosystem solution is **OpenRouter** (5 lines).
-You ask AI to add user auth. It hand-rolls JWT + bcrypt, when **Clerk** or
-**Auth.js** is what the ecosystem actually uses. You ask AI to add realtime
-chat. It builds a WebSocket server from scratch, when **Pusher** or
-**Liveblocks** has solved this problem already.
+The wheel has many shapes. Sometimes it's a SaaS integration (multi-LLM access?
+**OpenRouter**, not one-by-one APIs). Sometimes it's a battle-tested library
+(streaming AI UI? **Vercel AI SDK**, not custom SSE plumbing). Sometimes it's
+an engineering pattern (offline-first sync? **CRDTs + operation log**, not
+last-write-wins). Sometimes it's a process playbook (engineering 1:1s?
+**First Round / Lara Hogan templates**, not improvisation). Sometimes it's a
+design system principle (component API? **Atomic Design + Design Tokens**, not
+"just style it").
 
-AI knows **how** to do these things. It doesn't know **what the ecosystem has
-already converged on** — because mature SaaS solutions get a fraction of the
-training-data exposure that hand-rolled tutorials do.
+In every case, AI knows **how** to do these things — it can hand-roll the
+SaaS, write the library code, derive the pattern, draft the playbook. What it
+doesn't know is **what the field has already converged on** — because mature
+established solutions (be they SaaS, OSS, patterns, or playbooks) get a tiny
+fraction of the training-data exposure that hand-rolled tutorials do.
 
 This plugin closes that gap. Before AI rolls its own, it asks: *has the
-ecosystem already solved this?* If yes, use it. If only adjacent scenarios
-have mature solutions, adapt them. If nothing exists, derive — but say so.
+field already figured this out?* If yes, use the existing best practice
+(whatever form it takes — SaaS, library, pattern, playbook, principle). If
+only adjacent scenarios have mature solutions, adapt them. If nothing exists,
+derive — but say so.
 
 The naive fix — "always search the web" — has its own failure mode: SEO
 articles, AI-generated filler, and conflicting community posts can confidently
@@ -60,28 +66,44 @@ Works for any *"how do I do X?"* question — **technical or not**.
 
 ## Not just for technical questions
 
-The same "check the ecosystem first" logic works across every domain. Examples
-where users would otherwise get hand-rolled answers:
+"Best practice" comes in many forms, and the same "check the field first"
+logic works across all of them. Examples where users would otherwise get
+hand-rolled answers:
 
-**Technical (ecosystem solution available):**
+**Technical — SaaS / integration (the ecosystem has a managed solution):**
 > *"How do I add multi-LLM access to my app?"* → **OpenRouter**, not one-by-one APIs
 > *"How do I add user auth in Next.js?"* → **Clerk / Auth.js**, not hand-rolled JWT
 > *"How do I add file upload?"* → **Uploadthing / R2**, not hand-rolled multipart
 > *"How do I add realtime?"* → **Pusher / Liveblocks**, not a custom WebSocket server
 
+**Technical — library / framework choice (a battle-tested OSS option exists):**
+> *"How do I stream AI responses to the UI?"* → **Vercel AI SDK**, not custom SSE plumbing
+> *"How do I manage state in this React app?"* → **Zustand / Jotai**, not Context+useReducer
+> *"How do I do typed DB access?"* → **Drizzle / Prisma**, not hand-written SQL builders
+
+**Technical — engineering pattern (the field has converged on an approach):**
+> *"How do I sync data across devices offline?"* → **CRDT + operation log**, not last-write-wins
+> *"How do I handle long-running jobs reliably?"* → **Outbox pattern + idempotent workers**, not "just retry"
+> *"How do I design a backwards-compatible API change?"* → **Expand-Contract migration**, not version forks
+
+**Design — system / principle (proven design language exists):**
+> *"How should I structure a component library?"* → **Atomic Design + Design Tokens**, not ad-hoc
+> *"How do I make my app accessible by default?"* → **WCAG + ARIA patterns**, not "I'll add aria-labels later"
+
 **Process / communication (proven playbooks exist):**
-> *"How do I run an effective 1:1 with a new direct report?"*
-> *"What's the best way to negotiate salary at a startup?"*
-> *"How should I structure a PR description so it actually gets read?"*
+> *"How do I run an effective 1:1 with a new direct report?"* → **First Round / Lara Hogan templates**
+> *"How do I set OKRs that aren't theater?"* → **Christina Wodtke's Radical Focus**
+> *"How should I structure a PR description so it actually gets read?"* → **Conventional commit + body conventions**
 
 **Life skills (mature practices exist outside dev):**
-> *"How do other people handle picky-eater toddlers without making mealtimes a battle?"*
-> *"What's a reasonable approach to async standup updates for a remote team?"*
+> *"How do I handle picky-eater toddlers?"* → **Division of Responsibility (Ellyn Satter)**
+> *"What's a reasonable approach to async standup for a remote team?"* → **GitLab handbook patterns**
 
 The pattern: **anywhere humans have already figured something out and the
-recommendation isn't already in your head**. If a direct answer exists in the
-ecosystem, you get it. If only adjacent scenarios have proven playbooks, the
-plugin adapts them. If nothing exists, it derives — and labels what it's doing.
+recommendation isn't already in your head**. If a direct answer exists — in
+any of these forms — you get it. If only adjacent scenarios have proven
+solutions, the plugin adapts them. If nothing exists, it derives — and
+labels what it's doing.
 
 ## What it does
 
@@ -131,8 +153,10 @@ plugin adapts them. If nothing exists, it derives — and labels what it's doing
 
 Ask any how-to question in a fresh conversation. Examples that should trigger:
 
-> *"How do I add multi-LLM access to my app?"* (technical → likely ✅ Found: OpenRouter)
-> *"How do other teams structure their oncall rotation?"* (process)
+> *"How do I add multi-LLM access to my app?"* (technical → likely ✅ Found: OpenRouter SaaS)
+> *"How do I manage state in a medium-sized React app?"* (technical → likely ✅ Found: Zustand library)
+> *"How do I design a backwards-compatible API change?"* (technical → likely ✅ Found: Expand-Contract pattern)
+> *"How do other teams structure their oncall rotation?"* (process playbook)
 > *"What's the best way to write a cold email that gets a response?"* (communication)
 
 You'll see one of four tier-tags appended to the answer:
