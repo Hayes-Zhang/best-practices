@@ -4,8 +4,9 @@
 [![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://docs.claude.com/en/docs/claude-code/plugins)
 
-**Ecosystem-aware Claude Code.** Before answering or coding, the plugin checks
-whether someone has already figured out a mature solution for your scenario.
+**Community-aware Claude Code.** Before answering or coding, the plugin checks
+whether someone in the community has already figured out a mature solution for
+your scenario.
 
 - ✅ **Direct best practice exists** → you get it (with sources and trade-offs)
 - 🧩 **Only adjacent scenarios have mature practices** → the plugin adapts them
@@ -36,12 +37,12 @@ design system principle (component API? **Atomic Design + Design Tokens**, not
 
 In every case, AI knows **how** to do these things — it can hand-roll the
 SaaS, write the library code, derive the pattern, draft the playbook. What it
-doesn't know is **what the field has already converged on** — because mature
+doesn't know is **what the community has already converged on** — because mature
 established solutions (be they SaaS, OSS, patterns, or playbooks) get a tiny
 fraction of the training-data exposure that hand-rolled tutorials do.
 
 This plugin closes that gap. Before AI rolls its own, it asks: *has the
-field already figured this out?* If yes, use the existing best practice
+community already figured this out?* If yes, use the existing best practice
 (whatever form it takes — SaaS, library, pattern, playbook, principle). If
 only adjacent scenarios have mature solutions, adapt them. If nothing exists,
 derive — but say so.
@@ -66,11 +67,11 @@ Works for any *"how do I do X?"* question — **technical or not**.
 
 ## Not just for technical questions
 
-"Best practice" comes in many forms, and the same "check the field first"
+"Best practice" comes in many forms, and the same "check the community first"
 logic works across all of them. Examples where users would otherwise get
 hand-rolled answers:
 
-**Technical — SaaS / integration (the ecosystem has a managed solution):**
+**Technical — SaaS / integration (the community has converged on a managed solution):**
 > *"How do I add multi-LLM access to my app?"* → **OpenRouter**, not one-by-one APIs
 > *"How do I add user auth in Next.js?"* → **Clerk / Auth.js**, not hand-rolled JWT
 > *"How do I add file upload?"* → **Uploadthing / R2**, not hand-rolled multipart
@@ -81,7 +82,7 @@ hand-rolled answers:
 > *"How do I manage state in this React app?"* → **Zustand / Jotai**, not Context+useReducer
 > *"How do I do typed DB access?"* → **Drizzle / Prisma**, not hand-written SQL builders
 
-**Technical — engineering pattern (the field has converged on an approach):**
+**Technical — engineering pattern (the community has converged on an approach):**
 > *"How do I sync data across devices offline?"* → **CRDT + operation log**, not last-write-wins
 > *"How do I handle long-running jobs reliably?"* → **Outbox pattern + idempotent workers**, not "just retry"
 > *"How do I design a backwards-compatible API change?"* → **Expand-Contract migration**, not version forks

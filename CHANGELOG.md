@@ -13,11 +13,16 @@ _Nothing yet. Contributors: add your changes here before opening a PR._
 
 ### Changed (positioning + tier system, non-breaking)
 - **Repositioned the plugin** from "intellectual humility for Claude Code" to
-  **"ecosystem-aware Claude Code"**. The new pitch: before AI rolls its own
-  solution, it asks "has the ecosystem already solved this?" Default examples
-  in the README now lead with SaaS/integration choices (OpenRouter, Clerk,
-  Liveblocks, Uploadthing) — the kind of decision where AI's default
-  hand-rolling is most wasteful.
+  **"community-aware Claude Code"**. The new pitch: before AI rolls its own
+  solution, it asks "has the community already solved this?" Examples in the
+  README span six forms of mature practice — SaaS (OpenRouter, Clerk,
+  Liveblocks), OSS libraries (Vercel AI SDK, Zustand, Drizzle), engineering
+  patterns (CRDT + op log, Outbox, Expand-Contract), design principles
+  (Atomic Design, Design Tokens, 12-Factor), process playbooks (First Round
+  1:1s, GitLab async, Radical Focus OKRs), and non-technical established
+  practices (Ellyn Satter, WHO guides). The unifying claim: AI's default of
+  hand-rolling a solution wastes effort whenever the community has already
+  figured the same problem out.
 - **Expanded confidence tiers from 3 to 4 levels**:
   - ✅ **Found** — multiple independent authoritative sources agree on the same scenario
   - 🔧 **Synthesized** — fragmented same-scenario consensus

@@ -31,9 +31,9 @@ metadata:
 
 # Best Practices Skill
 
-**Core philosophy: field-aware + intellectually honest about tier.**
+**Core philosophy: community-aware + intellectually honest about tier.**
 
-When asked something the user doesn't already know well, AI's default behavior is to **roll its own solution** from training data — even when the field has already converged on a mature one. The "mature one" comes in many forms:
+When asked something the user doesn't already know well, AI's default behavior is to **roll its own solution** from training data — even when the community has already converged on a mature one. The "mature one" comes in many forms:
 
 - a managed SaaS (OpenRouter, Clerk, Liveblocks)
 - a battle-tested OSS library (Vercel AI SDK, Zustand, Drizzle)
@@ -42,13 +42,13 @@ When asked something the user doesn't already know well, AI's default behavior i
 - a process playbook (First Round 1:1 templates, GitLab async handbook, Radical Focus OKRs)
 - a non-technical established practice (Ellyn Satter's Division of Responsibility, WHO infant feeding guides)
 
-In every case, AI knows **how** to do the thing — it can hand-roll the SaaS, write the library code, derive the pattern, draft the playbook from scratch. What it doesn't know is **what the field has already converged on** — because mature established solutions (whatever form) get a tiny fraction of the training-data exposure that hand-rolled tutorials do. Compounding problems:
+In every case, AI knows **how** to do the thing — it can hand-roll the SaaS, write the library code, derive the pattern, draft the playbook from scratch. What it doesn't know is **what the community has already converged on** — because mature established solutions (whatever form) get a tiny fraction of the training-data exposure that hand-rolled tutorials do. Compounding problems:
 
 - AI doesn't know what it doesn't know — when training data is stale or shallow, it still answers, just less correctly
 - AI doesn't actively look for counter-evidence or trade-off discussions
 - When **no direct best practice exists**, AI defaults to first-principles reasoning — but first-principles output is rarely the best path; adjacent scenarios with similar constraints often have mature solutions worth adapting
 
-This skill changes the default. **Look at the field first. Adapt from adjacent scenarios second. Derive from first principles only as a last resort. And honestly label which tier each answer comes from.**
+This skill changes the default. **Look at the community first. Adapt from adjacent scenarios second. Derive from first principles only as a last resort. And honestly label which tier each answer comes from.**
 
 ---
 
