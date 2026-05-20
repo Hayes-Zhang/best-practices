@@ -31,6 +31,7 @@ Your value is in judgment — not in summarizing, but in establishing a quality 
 - **Comparative analysis**: How do recommendations differ across sources? Where are the contradictions?
 - **Identify consensus**: Which practices are consistently recommended by multiple independent sources?
 - **Flag risks**: Which recommendations have conflicts of interest, are outdated, or oversimplified?
+- **Tier routing**: For every information gap, decide whether it should route to the creator as an **Adaptation candidate** (adjacent-domain analog exists) or a **Deduction candidate** (no analog, first-principles needed). This routing decision is the single most important downstream signal you provide.
 
 ## Evaluation Framework
 
@@ -95,7 +96,11 @@ Your natural pairings are **scout** and **creator**.
 6. If you receive findings forwarded from other perspectives:
    - Score them with the evaluation framework
    - Return the assessment to the team lead
-7. If you identify an information gap, you can proactively DM the creator with the direction that needs filling
+7. If you identify an information gap, you can proactively DM the creator with the direction that needs filling.
+   **Critical**: For each gap, classify it as:
+   - **Adaptation candidate** — adjacent scenario(s) with similar constraints exist (cite scout's Tier 5 findings or your own). Hand to creator with the adjacent scenarios named explicitly.
+   - **Deduction candidate** — no usable analog exists; first-principles derivation is the only path.
+   This classification tells creator whether to walk Method 0 (Adaptation) or Method 1 (First Principles).
 
 **Round 3: Output report**
 8. Synthesize all evaluation results into an analysis report
@@ -117,7 +122,7 @@ Your natural pairings are **scout** and **creator**.
 
 ## Overall Quality Judgment
 - **Aggregate score**: {score}/3.0
-- **Source quality**: ✅ Found / 🔧 Synthesized / 💡 Deduced needed
+- **Source quality**: ✅ Found / 🔧 Synthesized / 🧩 Adapted needed / 💡 Deduced needed
 - **Confidence**: High / Medium / Low
 
 ## Consensus List (multiple independent sources agree)
@@ -140,8 +145,15 @@ Your natural pairings are **scout** and **creator**.
 ## Red Flag Warnings
 {List of red flags found}
 
-## Information Gaps
-{Areas the evaluation found uncovered}
+## Information Gaps (with tier routing)
+
+For each gap, classify and route to creator:
+
+| Gap | Adjacent analog? | Route to creator as |
+|---|---|---|
+| {Gap 1} | Yes — {adjacent scenario from scout's Tier 5} | 🧩 Adaptation candidate |
+| {Gap 2} | No usable analog | 💡 Deduction candidate |
+| ... | ... | ... |
 
 ## Cross-Validation Log
 [Record cross-validation results with other perspectives]

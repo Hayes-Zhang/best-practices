@@ -1,6 +1,6 @@
 {
   "name": "best-practices",
-  "description": "Intellectual humility for Claude Code — searches existing best practices on any topic, grades source quality, and falls back to first-principles reasoning when nothing reliable exists.",
+  "description": "Ecosystem-aware Claude Code — before AI rolls its own solution, checks whether the ecosystem already has a mature one. Four honest tiers (Found / Synthesized / Adapted / Deduced), works for any domain.",
   "owner": {
     "name": "Hayes Zhang",
     "url": "https://github.com/Hayes-Zhang"
@@ -8,15 +8,15 @@
   "plugins": [
     {
       "name": "best-practices",
-      "description": "When you ask about something you don't know well — technical or otherwise — silently searches for existing best practices, evaluates source quality with reverse-thinking, grades its own confidence (Found / Synthesized / Deduced), and reasons from first principles when no reliable practice exists. Use /bp for deep 3-agent investigations.",
-      "version": "2.1.0",
+      "description": "Before AI rolls its own solution, this plugin checks the ecosystem for mature ones: ✅ Found (multi-source agreement) → 🔧 Synthesized (same-scenario fragments) → 🧩 Adapted (adapted from adjacent scenarios with similar constraints) → 💡 Deduced (first-principles, last resort). Silent auto-search + 5 red-flag detectors + three-step adaptation when no direct answer exists. Use /bp for deep 3-agent investigations.",
+      "version": "2.2.0",
       "author": {
         "name": "Hayes Zhang",
         "url": "https://github.com/Hayes-Zhang"
       },
       "source": "./",
       "category": "productivity",
-      "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "first-principles"]
+      "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "ecosystem-aware", "adjacent-domain-transfer", "first-principles"]
     }
   ]
 }

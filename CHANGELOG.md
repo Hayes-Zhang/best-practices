@@ -9,6 +9,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Nothing yet. Contributors: add your changes here before opening a PR._
 
+## [2.2.0] — 2026-05-20
+
+### Changed (positioning + tier system, non-breaking)
+- **Repositioned the plugin** from "intellectual humility for Claude Code" to
+  **"ecosystem-aware Claude Code"**. The new pitch: before AI rolls its own
+  solution, it asks "has the ecosystem already solved this?" Default examples
+  in the README now lead with SaaS/integration choices (OpenRouter, Clerk,
+  Liveblocks, Uploadthing) — the kind of decision where AI's default
+  hand-rolling is most wasteful.
+- **Expanded confidence tiers from 3 to 4 levels**:
+  - ✅ **Found** — multiple independent authoritative sources agree on the same scenario
+  - 🔧 **Synthesized** — fragmented same-scenario consensus
+  - 🧩 **Adapted** *(NEW)* — no direct practice; adjacent scenarios with similar
+    constraints have mature solutions → three-step adaptation (adjacent practice
+    → common principle → customization for current scenario)
+  - 💡 **Deduced** — no direct AND no adjacent analog → first-principles (last resort)
+
+  Ordering reflects "directness of evidence." 🧩 Adapted sits between Synthesized
+  and Deduced because adapted advice has real-world anchors (each principle traces
+  to a validated adjacent practice) but carries domain-shift risk.
+
+### Added
+- **🧩 Adapted tier (the headline addition)**: When no direct practice exists,
+  the plugin now does NOT jump straight to first-principles. Instead it executes
+  a three-step adaptation: (1) identify 2-3 adjacent scenarios with similar
+  constraints, (2) extract common principles, (3) customize for the user's
+  scenario. Every Adapted recommendation names the adjacent sources and calls
+  out domain-shift risks.
+- **Agent redesign for Adaptation routing**:
+  - `scout`: new **Tier 5 — Adjacent-Domain Mining** in the search strategy.
+    Mandatory when Tier 1-3 yields thin results.
+  - `analyst`: now classifies each information gap as **🧩 Adaptation candidate**
+    (adjacent analog exists) or **💡 Deduction candidate** (no analog). This
+    routing tells creator which method to use.
+  - `creator`: **Method 0 — Adaptation** is now the priority path. First-principles
+    derivation (renamed Method 1) is the fallback, used only when no analog exists.
+    `creator` is no longer allowed to default to first-principles when an
+    adaptation candidate exists.
+- **Quality rubric**: new four-tier decision matrix; new "伪邻近迁移"
+  (false-adjacency transfer) red-flag detector for Adapted-tier hygiene.
+- **Output templates**: Template B now has a dedicated "三、定制建议 (Adapted)"
+  section, separate from "四、原创推荐 (Deduced)". Template A's confidence-tier
+  legend covers all four tiers.
+- **Authority sources**: new "邻近场景识别策略" (adjacent-scenario identification
+  strategy) section, covering constraint-similarity dimension, community-maturity
+  checks, and Adapted-specific search keywords.
+- **Hard rule in SKILL.md**: "Prefer Adapted over Deduced — never skip
+  adaptation when an adjacent analog exists." Skipping Adapted to default to
+  Deduced is the most common AI failure mode this plugin guards against.
+
+### Notes
+- Public API unchanged. `/bp` and auto-mode behavior are backward-compatible
+  with 2.1.0 users — old conversations don't break, just gain a richer fourth
+  tier when applicable.
+- This is a positioning + tier-system minor (2.1 → 2.2), not a major bump.
+  No breaking changes.
+
 ## [2.1.0] — 2026-05-19
 
 ### Changed (positioning, non-breaking)

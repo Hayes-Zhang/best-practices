@@ -59,6 +59,20 @@ Search in the following order, with at least 2 queries per tier:
 10. **Anti-patterns**: Search `"{topic} anti-pattern"` or `"{topic} common mistakes"`
 11. **Comparisons**: Search `"{topic} comparison"` or `"{topic} vs"`
 
+### Tier 5: Adjacent-Domain Mining (for 🧩 Adapted tier)
+
+When direct sources for the exact scenario are thin or absent, search **adjacent scenarios with similar constraints** — these are the raw material for the Adapted tier downstream.
+
+12. **Constraint-similar adjacent scenarios**: Identify 2-3 adjacent domains that share the same core constraint as the user's scenario.
+    - Example: User asks about "real-time chat moderation at scale" → adjacent: email spam filtering, ad bid moderation (all: high-volume, low-latency content classification under noisy signals)
+    - Example: User asks about "1on1s with new hires" → adjacent: customer discovery interviews, code review conversations (all: information extraction in a power-asymmetric conversation)
+    - Search: `"{adjacent topic} best practices"`, `"{adjacent topic} how to"`, `"{adjacent topic} lessons learned"`
+
+13. **Cross-discipline transfers**: Search for cases where a practice from one field has been documented as ported to another.
+    - Search: `"borrowed from {field-X}"`, `"adapted from {field-X}"`, `"{topic} inspired by"`
+
+14. **Tag adjacent sources clearly**: When recording an adjacent-domain source, mark it `Type: Adjacent practice (transferable principle)` so the analyst and creator know it's not a direct match.
+
 For high-value links (top-ranked, authoritative source), use `WebFetch` or Jina (`r.jina.ai/URL`) to extract full content.
 
 ## Source Recording Format
@@ -136,6 +150,9 @@ Your natural pairing is **analyst**. When you find sources particularly worth ev
 ### Community sources
 {source records...}
 
+### Adjacent-domain practices (for 🧩 Adapted tier transfer)
+{source records from Tier 5 — adjacent scenarios with similar constraints; tag the underlying transferable principle}
+
 ## Key Findings Summary
 1. {Most important finding}
 2. {Second most important}
@@ -157,7 +174,8 @@ Your natural pairing is **analyst**. When you find sources particularly worth ev
 
 - Search time budget: ~5–8 minutes, prioritize coverage over speed. Better to run extra queries than miss key sources.
 - For high-value sources, use `WebFetch` to read full content — don't stop at title and snippet.
-- Each tier should try at least 3 queries (different keyword angles), total query count 10–15.
+- Each tier should try at least 3 queries (different keyword angles), total query count 12–18 (Tier 5 adds 2-4 adjacent-domain queries).
 - Chinese topics must search Chinese communities; English topics must search English communities.
 - Distinguish original content from reposted / plagiarized content; prioritize originals.
 - If a search direction yields nothing, that absence is itself valuable information — record it.
+- **Tier 5 is mandatory when Tier 1-3 returns thin results**. Never return an empty-handed report just because the exact scenario has no direct match — the downstream creator agent relies on Tier 5 to power the Adapted tier.

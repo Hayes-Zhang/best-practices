@@ -83,12 +83,20 @@ whether the question is about React, PostgreSQL, or running 1:1 meetings.
 
 If you asked something more niche — say, *"How do I run 1:1s with a direct
 report who's twice my age and used to be my peer?"* — the skill might find
-fragmented advice or nothing authoritative. In that case:
+fragmented advice or nothing authoritative. In that case (and **only after
+trying adaptation** from adjacent scenarios like reverse-mentorship and
+peer-to-manager transitions, both of which turned out too generic to anchor
+this specific dynamic), the response falls back to Deduced:
 
-> 💡 **Deduced from first principles** (no reliable existing practice found)
+> 💡 **Deduced from first principles** (no reliable existing practice found,
+> and no usable adjacent analog after searching for reverse-mentorship and
+> peer-to-manager transition literature)
 >
 > I searched but found mostly LinkedIn-influencer posts and conflicting
-> Reddit anecdotes — no authoritative source on this specific dynamic.
+> Reddit anecdotes — no authoritative source on this specific dynamic. I
+> also looked at adjacent scenarios (reverse-mentorship, peer-to-manager
+> transition) but those bodies of work treat the age/seniority gap as
+> incidental, not central. So no usable adaptation anchor either.
 >
 > Here's a reasonable approach derived from first principles:
 >

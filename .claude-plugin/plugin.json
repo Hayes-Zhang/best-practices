@@ -1,10 +1,10 @@
 {
   "name": "best-practices",
-  "version": "2.1.0",
-  "description": "Intellectual humility for Claude Code. When asked about something you don't know well (any domain), it searches for existing best practices, grades source quality, and falls back to first-principles reasoning when no reliable practice exists — explicitly labeled.",
+  "version": "2.2.0",
+  "description": "Ecosystem-aware Claude Code. Before answering, checks whether the ecosystem has a mature solution for your scenario. Four honest tiers: ✅ Found (direct best practice) / 🔧 Synthesized (same-scenario fragments) / 🧩 Adapted (adapted from adjacent scenarios with similar constraints) / 💡 Deduced (first-principles, last resort). Works for any domain — technical, product, life skills.",
   "author": { "name": "Hayes Zhang", "url": "https://github.com/Hayes-Zhang" },
   "homepage": "https://github.com/Hayes-Zhang/best-practices",
   "repository": "https://github.com/Hayes-Zhang/best-practices",
   "license": "MIT",
-  "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "first-principles", "agent-team"]
+  "keywords": ["best-practices", "research", "web-search", "quality-evaluation", "ecosystem-aware", "adjacent-domain-transfer", "first-principles", "agent-team"]
 }
